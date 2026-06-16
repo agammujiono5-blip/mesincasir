@@ -1,0 +1,181 @@
+/* ═══════════════════════════════════════════════════
+   DELL POS — RESPONSIVE LAYOUT  (mobile-first)
+   Breakpoints:
+     mobile   < 640px
+     tablet   640px – 1023px
+     desktop  ≥ 1024px
+═══════════════════════════════════════════════════ */
+
+/* ── Reset & page shell ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #cccccc;
+}
+
+/* Outer wrapper strips padding on small screens */
+#pos-outer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 8px;
+}
+
+/* ── Main frame ── */
+#pos-frame {
+  width: 100%;
+  max-width: 1440px;
+  border: 8px solid #000;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Body row ── */
+#pos-body {
+  display: flex;
+  flex: 1;
+  min-height: 500px;
+  position: relative;
+}
+
+/* ── Sidebar ── */
+#pos-sidebar {
+  width: 190px;
+  flex-shrink: 0;
+  border-right: 2px solid #000;
+  overflow-y: auto;
+  background: #fff;
+}
+
+/* ── Content ── */
+#pos-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 0;
+}
+
+/* ── Backdrop (hidden by default) ── */
+#pos-sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 90;
+}
+#pos-sidebar-backdrop.open { display: block; }
+
+/* ── Bottom nav (hidden by default) ── */
+#pos-bottom-nav { display: none; }
+
+/* ── Hamburger (hidden by default) ── */
+#pos-hamburger { display: none !important; }
+
+/* ── Mobile close bar (hidden by default) ── */
+.sidebar-mobile-close { display: none !important; }
+
+/* ── All tables responsive ── */
+.pos-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Stat grid 4-col by default ── */
+.pos-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+/* ══════════════════════════════════════
+   TABLET  640px – 1023px
+══════════════════════════════════════ */
+@media (max-width: 1023px) {
+  #pos-outer { padding: 4px; }
+
+  #pos-frame { border-width: 4px; }
+
+  #pos-sidebar { width: 155px; }
+
+  /* Compact sidebar — hide verbose widgets */
+  .sidebar-promo  { display: none !important; }
+  .sidebar-status { display: none !important; }
+
+  /* Show hamburger on tablet */
+  #pos-hamburger { display: flex !important; }
+
+  /* 2-col stat grid on tablet */
+  .pos-grid-4 { grid-template-columns: 1fr 1fr; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE  < 640px
+══════════════════════════════════════ */
+@media (max-width: 639px) {
+  body { background: #000 !important; }
+
+  #pos-outer { padding: 0; }
+
+  #pos-frame {
+    border: 3px solid #000;
+    max-width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
+  /* Sidebar becomes a fixed slide-over */
+  #pos-sidebar {
+    position: fixed;
+    top: 0;
+    left: -240px;
+    width: 225px;
+    height: 100%;
+    z-index: 100;
+    border-right: 3px solid #000;
+    transition: left 0.22s ease;
+    box-shadow: none;
+  }
+  #pos-sidebar.open { left: 0; }
+
+  /* Show mobile close bar inside sidebar */
+  .sidebar-mobile-close { display: flex !important; }
+
+  /* Show bottom nav */
+  #pos-bottom-nav {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    background: #000;
+    border-top: 3px solid #e91d2a;
+    z-index: 50;
+    flex-shrink: 0;
+  }
+
+  /* Hide desktop footer & bottom bar on mobile */
+  #pos-footer     { display: none; }
+  #pos-bottom-bar { display: none; }
+
+  /* 2-col stat grid */
+  .pos-grid-4 { grid-template-columns: 1fr 1fr; }
+
+  /* Hide long desktop-only title text */
+  .pos-desktop-title { display: none !important; }
+
+  /* Compact section headers */
+  .pos-section-title {
+    font-size: 11px !important;
+    letter-spacing: 1px !important;
+  }
+
+  /* Compact padding inside modules */
+  .pos-module-pad { padding: 8px !important; }
+
+  /* Tables always scrollable */
+  .pos-table-wrap table { min-width: 340px; }
+}

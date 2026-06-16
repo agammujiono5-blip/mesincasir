@@ -1,0 +1,33 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build
+bin/
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Coverage
+coverage.out
+
+# Vendor (opsional)
+vendor/
+
+# IDE
+.vscode/
+.idea/
+
+# MacOS
+.DS_Store
